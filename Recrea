@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECREA - Revolución Creativa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-green: #00ff88;
+            --neon-blue: #00ccff;
+            --neon-pink: #ff0080;
+            --dark-bg: #0a0a0a;
+            --card-bg: #1a1a1a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            color: white;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Efectos de partículas */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Header épico */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(45deg, #000000, #001a00, #000000);
+        }
+
+        .hero-content h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 255, 136, 0.5);
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px var(--neon-green); }
+            to { text-shadow: 0 0 30px var(--neon-blue), 0 0 40px var(--neon-pink); }
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
+            color: black;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 255, 136, 0.6);
+        }
+
+        /* Sección de materiales con efecto 3D */
+        .materials-section {
+            padding: 100px 20px;
+            background: var(--dark-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.5rem;
+            margin-bottom: 4rem;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .material-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid transparent;
+            background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
+                        linear-gradient(45deg, var(--neon-green), var(--neon-blue)) border-box;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .material-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .material-card:hover::before {
+            left: 100%;
+        }
+
+        .material-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+        }
+
+        .material-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px var(--neon-green));
+        }
+
+        /* Galería de proyectos épica */
+        .projects-section {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, var(--dark-bg), #000);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid transparent;
+            background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
+                        linear-gradient(45deg, var(--neon-pink), var(--neon-blue)) border-box;
+        }
+
+        .project-image {
+            height: 250px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        /* Sección de retos con efecto neón */
+        .challenge-section {
+            padding: 100px 20px;
+            background: var(--dark-bg);
+            text-align: center;
+        }
+
+        .challenge-card {
+            background: var(--card-bg);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem;
+            border-radius: 20px;
+            border: 3px solid transparent;
+            background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
+                        linear-gradient(45deg, var(--neon-pink), var(--neon-green)) border-box;
+            box-shadow: 0 0 50px rgba(255, 0, 128, 0.3);
+        }
+
+        .challenge-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Formularios modernos */
+        .form-section {
+            padding: 100px 20px;
+            background: linear-gradient(180deg, #000, var(--dark-bg));
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 2px solid transparent;
+            background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
+                        linear-gradient(45deg, var(--neon-blue), var(--neon-green)) border-box;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--neon-green);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        /* Footer espectacular */
+        footer {
+            background: #000;
+            padding: 3rem 20px;
+            text-align: center;
+            border-top: 2px solid var(--neon-green);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            color: var(--neon-green);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: var(--neon-blue);
+            transform: scale(1.2);
+        }
+
+        /* Nuevos estilos para formularios de proyectos */
+        .project-form {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+        }
+
+        .challenge-form {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 4rem;
+            }
+            
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .social-links {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Efecto de partículas -->
+    <div id="particles-js"></div>
+
+    <!-- Hero Section ÉPICA -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>RECREA</h1>
+            <div class="hero-subtitle">TRANSFORMA BASURA EN OBRA MAESTRA</div>
+            <p style="margin-bottom: 2rem; font-size: 1.2rem; opacity: 0.8;">
+                Donde lo desechado se convierte en inspiración
+            </p>
+            <a href="#revolucion" class="cta-button">ÚNETE A LA REVOLUCIÓN</a>
+        </div>
+    </section>
+
+    <!-- Sección de Materiales -->
+    <section class="materials-section" id="revolucion">
+        <h2 class="section-title">MATERIALES ÉPICOS</h2>
+        <div class="materials-grid">
+            <div class="material-card">
+                <div class="material-icon">🥤</div>
+                <h3>BOTELLAS PLÁSTICAS</h3>
+                <p>Transforma lo ordinario en extraordinario</p>
+                <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                    Macetas inteligentes • Esculturas • Sistemas hidropónicos
+                </div>
+            </div>
+            <div class="material-card">
+                <div class="material-icon">🥫</div>
+                <h3>LATAS METÁLICAS</h3>
+                <p>Da nueva vida al metal olvidado</p>
+                <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                    Lámparas • Joyería • Instrumentos musicales
+                </div>
+            </div>
+            <div class="material-card">
+                <div class="material-icon">📦</div>
+                <h3>CARTÓN CREATIVO</h3>
+                <p>Donde el packaging se convierte en arte</p>
+                <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                    Muebles • Juguetes • Arquitectura temporal
+                </div>
+            </div>
+            <div class="material-card">
+                <div class="material-icon">💿</div>
+                <h3>TECNO-RECICLAJE</h3>
+                <p>El futuro en tus manos</p>
+                <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+                    Arte digital • Esculturas lumínicas • Moda tecno
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería de Proyectos -->
+    <section class="projects-section">
+        <h2 class="section-title">PROYECTOS LEGENDARIOS</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4);">
+                    JARDÍN VERTICAL
+                </div>
+                <div class="project-content">
+                    <h3>Bosque Urbano con Botellas</h3>
+                    <p>150 botellas transformadas en ecosistema vertical</p>
+                    <button class="cta-button" style="margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 1rem;">
+                        VER TUTORIAL
+                    </button>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(45deg, #a8e6cf, #dcedc1);">
+                    LÁMPARA CÓSMICA
+                </div>
+                <div class="project-content">
+                    <h3>Constelación de Latas</h3>
+                    <p>Arte lumínico con materiales reciclados</p>
+                    <button class="cta-button" style="margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 1rem;">
+                        VER TUTORIAL
+                    </button>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(45deg, #ffd93d, #ff6b6b);">
+                    MUEBLE CARTO
+                </div>
+                <div class="project-content">
+                    <h3>Mueble Modular de Cartón</h3>
+                    <p>Diseño sostenible que desafía lo convencional</p>
+                    <button class="cta-button" style="margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 1rem;">
+                        VER TUTORIAL
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Formulario para subir proyectos -->
+        <div class="form-container project-form">
+            <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2rem; background: linear-gradient(45deg, var(--neon-green), var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                📤 ¡Sube tu proyecto!
+            </h2>
+            <form onsubmit="guardarProyecto(event)">
+                <input type="text" class="form-input" placeholder="Tu nombre" required>
+                <input type="text" class="form-input" placeholder="Nombre del proyecto" required>
+                <textarea class="form-input" placeholder="Describe tu creación..." rows="3" required></textarea>
+                <button type="submit" class="cta-button" style="width: 100%; margin-top: 1rem;">
+                    ENVIAR PROYECTO
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Reto del Mes -->
+    <section class="challenge-section">
+        <h2 class="section-title">RETO DEL MES</h2>
+        <div class="challenge-card">
+            <div class="challenge-title">🎃 DISFRAZ TECNO-RECICLADO</div>
+            <p style="font-size: 1.3rem; margin-bottom: 1.5rem;">
+                Crea el disfraz más innovador usando solo materiales reciclados
+            </p>
+            <div style="background: rgba(0, 255, 136, 0.1); padding: 1.5rem; border-radius: 15px; margin: 2rem 0;">
+                <h4 style="color: var(--neon-green); margin-bottom: 1rem;">🏆 PREMIOS ÉPICOS</h4>
+                <p>• Kit profesional de herramientas</p>
+                <p>• $500 en materiales ecológicos</p>
+                <p>• Exposición en galería virtual</p>
+            </div>
+            
+            <!-- Formulario para participar en el reto -->
+            <div class="challenge-form">
+                <h3 style="text-align: center; margin-bottom: 1.5rem; color: var(--neon-pink);">🎯 Participa en el reto</h3>
+                <form onsubmit="participarReto(event)">
+                    <input type="text" class="form-input" placeholder="Tu nombre" required>
+                    <input type="text" class="form-input" placeholder="Nombre del disfraz" required>
+                    <textarea class="form-input" placeholder="Describe tu disfraz y materiales usados..." rows="3" required></textarea>
+                    <button type="submit" class="cta-button" style="width: 100%; margin-top: 1rem; background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));">
+                        ¡Participar!
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de Contacto -->
+    <section class="form-section">
+        <div class="form-container">
+            <h2 style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem; background: linear-gradient(45deg, var(--neon-green), var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                ¿LISTO PARA CREAR?
+            </h2>
+            <form onsubmit="enviarContacto(event)">
+                <input type="text" class="form-input" placeholder="Tu nombre completo" required>
+                <input type="email" class="form-input" placeholder="Tu email" required>
+                <select class="form-input" required>
+                    <option value="">Selecciona tu material favorito</option>
+                    <option value="plastic">Botellas Plásticas</option>
+                    <option value="cans">Latas Metálicas</option>
+                    <option value="cardboard">Cartón Creativo</option>
+                    <option value="tech">Tecno-Reciclaje</option>
+                </select>
+                <textarea class="form-input" placeholder="Cuéntanos tu idea épica..." rows="4" required></textarea>
+                <button type="submit" class="cta-button" style="width: 100%; margin-top: 1rem;">
+                    ENVIAR PROYECTO
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <h3 style="font-size: 2rem; margin-bottom: 1rem; background: linear-gradient(45deg, var(--neon-green), var(--neon-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            RECREA
+        </h3>
+        <p style="opacity: 0.7; margin-bottom: 2rem;">
+            Transformando el mundo, un material a la vez
+        </p>
+        <div class="social-links">
+            <a href="#" class="social-link">📸</a>
+            <a href="#" class="social-link">🎥</a>
+            <a href="#" class="social-link">💬</a>
+            <a href="#" class="social-link">👥</a>
+        </div>
+        <p style="opacity: 0.5; margin-top: 2rem;">
+            © 2024 RECREA - Revolución Creativa. Todos los derechos reservados.
+        </p>
+    </footer>
+
+    <!-- Script para partículas -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Inicializar partículas
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#00ff88" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 3, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#00ccff",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" }
+                }
+            }
+        });
+
+        // Función para guardar proyectos
+        function guardarProyecto(event) {
+            event.preventDefault();
+            const form = event.target;
+            const nombre = form[0].value;
+            const p
